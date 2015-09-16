@@ -9,8 +9,12 @@ var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var request = require('request');
 var api= require('./api')
-var insertContactUrl = "https://gcdc2013-iogrow.appspot.com/_ah/api/crmengine/v1/contacts/insertv2?alt=json"
-var access_token = "ya29.6QH6uof8ekUYyCA4popnPTIH_JYJfFhWX0WZ3vmxKN5p-xHdY_pbvhs_QKYCGlAq-T_U"
+// var insertLeadEndpoint = "https://gcdc2013-iogrow.appspot.com/_ah/api/crmengine/v1/leads/insertv2?alt=json"
+var insertLeadEndpoint = "http://localhost:8090/_ah/api/crmengine/v1/leads/insertv2?alt=json"
+
+// var insertLeadEndpoint = "https://gcdc2013-iogrow.appspot.com/jj"
+var importCompletedEndpoint = "http://localhost:8090/jj"
+
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -48,36 +52,82 @@ var port = process.env.PORT || 8080;        // set our port
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
 
+
+
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-router.post('/import', function(req, res) {
-    console.log(req.body);
-    api.Import({},"e.glez.encinas@gmail.com_1440433224.48.csv",{0:"fr"},
+router.post('/import_leads', function(req, res) {
+    var jdata = JSON.parse(Object.keys(req.body)[0]);
+    var customFields = jdata['customfields_columns'];
+    var matchedColumns = jdata['matched_columns'];
+    // var filePath = jdata['file_path'];
+    var filePath = "google (14).csv";
+
+    api.Import({},filePath,{0:"fr"},
         function(resultRow,rawRow,rowIndex) {
-            var params = {
-                access: "public",
-                emails: [],
-                firstname: "test",
-                infonodes: [],
-                lastname: "test",
-                notes: [],
-                phones: [],
+            var params = {'access':'public'};
+            for(var key in matchedColumns){
+                if (rawRow[key]){
+                    if (params.hasOwnProperty(matchedColumns[key])){
+                        if (typeof(params[matchedColumns[key]])=='object'){
+                            params[matchedColumns[key]].push(rawRow[key]);
+                        }else{
+                            var newList = [];
+                            newList.push(params[matchedColumns[key]]);
+                            newList.push(rawRow[key]);
+                            params[matchedColumns[key]]=newList;
+                        }
+                    }
+                    else{
+                        params[matchedColumns[key]]=rawRow[key];
+                    }
+                }     
             }
-             console.log(rowIndex);
-             request.post({url:insertContactUrl, json:params}, function (error, response, body) {
-
-
-
-                }).auth(null, null, true, access_token);
-            res.json({message: rowIndex, params: req.body});
+            for(var key in customFields){
+                if (rawRow[key]){
+                    var customObj = {};
+                    if (params.hasOwnProperty(customFields[key])){
+                        if (typeof(params[customFields[key]])=='object'){
+                            customObj['default_field']=customFields[key]
+                            customObj['value']=rawRow[key]
+                            params['customFields'].push(customObj);
+                        }else{
+                            var newList = [];
+                            customObj['default_field']=customFields[key]
+                            customObj['value']=rawRow[key]
+                            newList['customFields'].push(customObj);
+                            params['customFields']=newList;
+                        }
+                    }
+                    else{
+                        customObj['default_field']=customFields[key]
+                        customObj['value']=rawRow[key]
+                        params['customFields']=customObj;
+                    }
+                }     
+            }
+            params.infonodes = api.getInfoNodes(params);
+            delete params.emails;
+            delete params.phones;
+             request.post({url:insertLeadEndpoint, json:params}, function (error, response, body) {
+             }).auth(null, null, true, jdata['token']);
         },
         function(){
-            res.json({message: "end", params: req.body});
+            var params = {'job_id':jdata['job_id']};
+            request.post({url:importCompletedEndpoint, json:params}, function (error, response, body) {
+            });
+            res.json({ message: 'imort api' });
         });
-
-
-
 });
 router.post('/export', function(req, res) {
+    res.json({ message: 'export api' });
+});
+
+router.get('/json', function(req, res) {
+    var dd = {"access":"public","firstname":"Idriss","lastname":"Belamri","infonodes":[{"kind":"emails","fields":[{"email":"idriss@iogrow.com"}]},{"kind":"phones","fields":[{"number":"0552 35 56 15"},{"number":"6619 8904"}]}]};
+    var cc = '{"access":"public","firstname":"Idriss","lastname":"Belamri","infonodes":[{"kind":"emails","fields":[{"email":"idriss@iogrow.com"}]},{"kind":"phones","fields":[{"number":"0552 35 56 15"},{"number":"6619 8904"}]}]}';
+    var jj = JSON.parse(cc);
+    console.log('0000');
+    console.log(dd);
     res.json({ message: 'export api' });
 });
 
