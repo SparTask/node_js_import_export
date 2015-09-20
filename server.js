@@ -2,18 +2,19 @@
 
 // BASE SETUP
 // =============================================================================
-
+var Iconv = require('iconv').Iconv;
 // call the packages we need
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var request = require('request');
 var api= require('./api')
-// var insertLeadEndpoint = "https://gcdc2013-iogrow.appspot.com/_ah/api/crmengine/v1/leads/insertv2?alt=json"
-var insertLeadEndpoint = "http://localhost:8090/_ah/api/crmengine/v1/leads/insertv2?alt=json"
+var insertLeadEndpoint = "https://gcdc2013-iogrow.appspot.com/_ah/api/crmengine/v1/leads/insertv2?alt=json"
+// var insertLeadEndpoint = "http://localhost:8090/_ah/api/crmengine/v1/leads/insertv2?alt=json"
 
-// var insertLeadEndpoint = "https://gcdc2013-iogrow.appspot.com/jj"
-var importCompletedEndpoint = "http://localhost:8090/jj"
+
+var importCompletedEndpoint = "https://gcdc2013-iogrow.appspot.com/jj"
+// var importCompletedEndpoint = "http://localhost:8090/jj"
 
 
 // configure app to use bodyParser()
@@ -59,8 +60,9 @@ router.post('/import_leads', function(req, res) {
     var jdata = JSON.parse(Object.keys(req.body)[0]);
     var customFields = jdata['customfields_columns'];
     var matchedColumns = jdata['matched_columns'];
-    // var filePath = jdata['file_path'];
-    var filePath = "google (14).csv";
+    var fullFilePath = jdata['file_path'];
+    var splitter = fullFilePath.split('/gcdc2013-iogrow.appspot.com/');
+    var filePath = splitter[1];
 
     api.Import({},filePath,{0:"fr"},
         function(resultRow,rawRow,rowIndex) {
@@ -108,6 +110,8 @@ router.post('/import_leads', function(req, res) {
             params.infonodes = api.getInfoNodes(params);
             delete params.emails;
             delete params.phones;
+            delete params.addresses;
+            console.log(params);
              request.post({url:insertLeadEndpoint, json:params}, function (error, response, body) {
              }).auth(null, null, true, jdata['token']);
         },
@@ -117,17 +121,21 @@ router.post('/import_leads', function(req, res) {
             });
             res.json({ message: 'imort api' });
         });
+        res.json({ message: 'imort api' });
 });
 router.post('/export', function(req, res) {
     res.json({ message: 'export api' });
 });
 
 router.get('/json', function(req, res) {
-    var dd = {"access":"public","firstname":"Idriss","lastname":"Belamri","infonodes":[{"kind":"emails","fields":[{"email":"idriss@iogrow.com"}]},{"kind":"phones","fields":[{"number":"0552 35 56 15"},{"number":"6619 8904"}]}]};
-    var cc = '{"access":"public","firstname":"Idriss","lastname":"Belamri","infonodes":[{"kind":"emails","fields":[{"email":"idriss@iogrow.com"}]},{"kind":"phones","fields":[{"number":"0552 35 56 15"},{"number":"6619 8904"}]}]}';
-    var jj = JSON.parse(cc);
-    console.log('0000');
-    console.log(dd);
+    var filePath = 'google (7).csv - google (7).csv.csv';
+    api.Import({},filePath,{0:"fr"},
+        function(resultRow,rawRow,rowIndex) {
+            console.log(rawRow);
+        },
+        function(){
+            console.log('completed');
+        });
     res.json({ message: 'export api' });
 });
 

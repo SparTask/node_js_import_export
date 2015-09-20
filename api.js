@@ -4,6 +4,8 @@ var gcloud = require('gcloud')({
     projectId: 'gcdc2013-iogrow',
     keyFilename: "cridentials.json"
 });
+var Iconv = require('iconv').Iconv;
+var iconvLite = require('iconv-lite');
 var Converter = require("csvtojson").Converter;
 var gcs = gcloud.storage()
 var backups = gcs.bucket('gcdc2013-iogrow.appspot.com');
@@ -16,10 +18,13 @@ var _this= this;
 exports.Import = function (params, file, map, callback , end ) {
     var fileStream = backups.file(file).createReadStream();
     var converter = new Converter({constructResult: false});
+    var csvConv = new Iconv('cp1252', 'utf-8');
+    var asciConv = new Iconv('ISO-8859-1', 'utf-8');
+    // var csvConv = new Iconv('cp1252', 'utf-8');
 //end_parsed will be emitted once parsing finished
     converter.on("end_parsed", end);
     converter.on("record_parsed", callback);
-    fileStream.pipe(converter);
+    fileStream.pipe(iconvLite.decodeStream('win1252')).pipe(converter);
 }
 exports.isEmpty = function(obj) {
     return Object.keys(obj).length === 0;
