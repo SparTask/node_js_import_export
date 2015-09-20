@@ -111,3 +111,7 @@ exports.getInfoNodes = function(params){
 	}
 	return infoNodes;
 }
+
+exports.exportContact=function(){
+
+};
