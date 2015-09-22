@@ -106,12 +106,8 @@ exports.getInfoNodes = function(params){
 			if (!(_this.isEmpty(customFieldObj.fields))){
 				infoNodes.push(customFieldObj);
 			}
-			
+
 		}
 	}
 	return infoNodes;
 }
-
-exports.exportContact=function(){
-
-};
