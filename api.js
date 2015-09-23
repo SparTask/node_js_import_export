@@ -124,15 +124,79 @@ exports.getInfoNodes = function(params){
 			var obj={};
 			obj[attr]=params[attr];
 			infoNodes.push(_this.constructInfoNode(obj));
-		}else if(attr=='customFields'){
-			var obj={};
-			obj[params[attr]['default_field']]=params[attr]['value'];
-			var customFieldObj = _this.constructCustomField(obj);
-			if (!(_this.isEmpty(customFieldObj.fields))){
-				infoNodes.push(customFieldObj);
-			}
-			
+		}else if(attr==='customFields'){
+			for (i=0;i<params['customFields'].length;i++){
+				var obj={};
+				obj[params['customFields'][i]['default_field']]=params['customFields'][i]['value'];
+				var customFieldObj = _this.constructCustomField(obj);
+				if (!(_this.isEmpty(customFieldObj.fields))){
+					infoNodes.push(customFieldObj);
+				}
+			}	
 		}
 	}
 	return infoNodes;
+}
+exports.prepareParams = function(rawRow,matchedColumns,customFields){
+	var params = {'access':'public'};
+            for(var key in matchedColumns){
+                if (rawRow[key]){
+                    if (matchedColumns[key]==='fullname'){
+                        params.firstname = rawRow[key].split(' ').slice(0, -1).join(' ') || " ";
+                        params.lastname = rawRow[key].split(' ').slice(-1).join(' ') || " ";
+                    }
+                    if (params.hasOwnProperty(matchedColumns[key])){
+                        if (typeof(params[matchedColumns[key]])=='object'){
+                            params[matchedColumns[key]].push(rawRow[key]);
+                        }else{
+                            var newList = [];
+                            newList.push(params[matchedColumns[key]]);
+                            newList.push(rawRow[key]);
+                            params[matchedColumns[key]]=newList;
+                        }
+                    }
+                    else{
+                        params[matchedColumns[key]]=rawRow[key];
+                    }
+                }     
+            }
+            params['customFields'] = [];
+            for(var key in customFields){
+                if (rawRow[key]){
+                    var customObj = {};
+                    if (params['customFields'].hasOwnProperty(customFields[key])){
+                        if (typeof(params[customFields[key]])=='object'){
+                            customObj['default_field']=customFields[key]
+                            customObj['value']=rawRow[key]
+                            params['customFields'].push(customObj);
+                        }else{
+                            var newList = [];
+                            customObj['default_field']=customFields[key]
+                            customObj['value']=rawRow[key]
+                            newList['customFields'].push(customObj);
+                            params['customFields']=newList;
+                        }
+                    }
+                    else{
+                        customObj['default_field']=customFields[key]
+                        customObj['value']=rawRow[key]
+                        params['customFields'].push(customObj);
+                    }
+                }     
+            }
+            console.log('---------------PARAMS BEFORE TRANSOFRMATION----------');
+            console.log(params.customFields);
+            params.infonodes = _this.getInfoNodes(params);
+            delete params.emails;
+            delete params.phones;
+            delete params.addresses;
+            console.log('---------------PARAMS After TRANSOFRMATION----------');
+            for (var key in params.infonodes){
+            	for (var ind in params.infonodes[key]){
+            		console.log(ind);
+            		console.log(params.infonodes[key][ind]);
+            	}
+            }
+            return params
+
 }

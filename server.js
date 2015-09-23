@@ -12,6 +12,7 @@ var iconv = require('iconv-lite');
 var api= require('./api');
 var utf8 = require('utf8');
 var insertLeadEndpoint = "https://gcdc2013-iogrow.appspot.com/_ah/api/crmengine/v1/leads/insertv2?alt=json"
+var insertContactEndpoint = "https://gcdc2013-iogrow.appspot.com/_ah/api/crmengine/v1/contacts/insertv2?alt=json"
 // var insertLeadEndpoint = "http://localhost:8090/_ah/api/crmengine/v1/leads/insertv2?alt=json"
 
 
@@ -67,56 +68,30 @@ router.post('/import_leads', function(req, res) {
     var filePath = splitter[1];
     api.Import({},filePath,{0:"fr"},
         function(resultRow,rawRow,rowIndex) {
-            var params = {'access':'public'};
-            for(var key in matchedColumns){
-                if (rawRow[key]){
-                    if (matchedColumns[key]==='fullname'){
-                        params.firstname = rawRow[key].split(' ').slice(0, -1).join(' ') || " ";
-                        params.lastname = rawRow[key].split(' ').slice(-1).join(' ') || " ";
-                    }
-                    if (params.hasOwnProperty(matchedColumns[key])){
-                        if (typeof(params[matchedColumns[key]])=='object'){
-                            params[matchedColumns[key]].push(rawRow[key]);
-                        }else{
-                            var newList = [];
-                            newList.push(params[matchedColumns[key]]);
-                            newList.push(rawRow[key]);
-                            params[matchedColumns[key]]=newList;
-                        }
-                    }
-                    else{
-                        params[matchedColumns[key]]=rawRow[key];
-                    }
-                }     
-            }
-            for(var key in customFields){
-                if (rawRow[key]){
-                    var customObj = {};
-                    if (params.hasOwnProperty(customFields[key])){
-                        if (typeof(params[customFields[key]])=='object'){
-                            customObj['default_field']=customFields[key]
-                            customObj['value']=rawRow[key]
-                            params['customFields'].push(customObj);
-                        }else{
-                            var newList = [];
-                            customObj['default_field']=customFields[key]
-                            customObj['value']=rawRow[key]
-                            newList['customFields'].push(customObj);
-                            params['customFields']=newList;
-                        }
-                    }
-                    else{
-                        customObj['default_field']=customFields[key]
-                        customObj['value']=rawRow[key]
-                        params['customFields']=customObj;
-                    }
-                }     
-            }
-            params.infonodes = api.getInfoNodes(params);
-            delete params.emails;
-            delete params.phones;
-            delete params.addresses;
+            var params = api.prepareParams(rawRow,matchedColumns,customFields);
              request.post({url:insertLeadEndpoint, json:params}, function (error, response, body) {
+             }).auth(null, null, true, jdata['token']);
+        },
+        function(){
+            var params = {'job_id':jdata['job_id']};
+            request.post({url:importCompletedEndpoint, json:params}, function (error, response, body) {
+            });
+            res.json({ message: 'imort api' });
+        });
+        console.log('import res');
+        res.json({ message: 'imort api' });
+});
+router.post('/import_contacts', function(req, res) {
+    var jdata = JSON.parse(Object.keys(req.body)[0]);
+    var customFields = jdata['customfields_columns'];
+    var matchedColumns = jdata['matched_columns'];
+    var fullFilePath = jdata['file_path'];
+    var splitter = fullFilePath.split('/gcdc2013-iogrow.appspot.com/');
+    var filePath = splitter[1];
+    api.Import({},filePath,{0:"fr"},
+        function(resultRow,rawRow,rowIndex) {
+            var params = api.prepareParams(rawRow,matchedColumns,customFields);
+             request.post({url:insertContactEndpoint, json:params}, function (error, response, body) {
              }).auth(null, null, true, jdata['token']);
         },
         function(){
