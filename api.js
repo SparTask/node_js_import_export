@@ -1,11 +1,14 @@
 fs = require("fs")
-
+var detect = require('charset-detector')
+var utf8 = require('to-utf-8')
 var gcloud = require('gcloud')({
     projectId: 'gcdc2013-iogrow',
     keyFilename: "cridentials.json"
 });
 var Iconv = require('iconv').Iconv;
-var iconvLite = require('iconv-lite');
+var peek = require('peek-stream')
+var splicer = require('stream-splicer')
+var iconv = require('iconv-lite')
 var Converter = require("csvtojson").Converter;
 var gcs = gcloud.storage()
 var backups = gcs.bucket('gcdc2013-iogrow.appspot.com');
@@ -15,16 +18,38 @@ var _this= this;
 
 //var access_token = "ya29.6gHU9LqUTZp4e_VdorIB3xRUHQ6M3SYIForWXLdOzGWwFScoiDR0p-MAtq8qGKRC5IaA"
 
+function ioconvertFrom (encoding) {
+  return splicer([
+      iconv.decodeStream(encoding)
+    ])
+}
+function getSupportedEncoding (encoding) {
+  if(encoding === 'ISO-8859-8-I') encoding = 'ISO-8859-8'
+  if(iconv.encodingExists(encoding)) return encoding
+  return 'utf8' // default
+}
+var ioEncoding = function(){
+ 	return peek(function (data, swap) {
+ 		var matches = detect(data)
+    	var encoding = matches.length > 0 && matches[0].confidence > 0
+      		? matches[0].charsetName 
+      		: 'utf8'
+    	encoding = getSupportedEncoding(encoding)
+	    if (encoding ==='ISO-8859-1'){
+	    	swap(null, splicer())
+	    }else{
+	    	swap(null, splicer([
+							      iconv.decodeStream('cp1252')
+							    ]));
+	    }
+	 })
+}
 exports.Import = function (params, file, map, callback , end ) {
     var fileStream = backups.file(file).createReadStream();
     var converter = new Converter({constructResult: false});
-    var csvConv = new Iconv('cp1252', 'utf-8');
-    var asciConv = new Iconv('ISO-8859-1', 'utf-8');
-    // var csvConv = new Iconv('cp1252', 'utf-8');
-//end_parsed will be emitted once parsing finished
     converter.on("end_parsed", end);
     converter.on("record_parsed", callback);
-    fileStream.pipe(iconvLite.decodeStream('win1252')).pipe(converter);
+    fileStream.pipe(ioEncoding()).pipe(converter);
 }
 exports.isEmpty = function(obj) {
     return Object.keys(obj).length === 0;

@@ -2,13 +2,15 @@
 
 // BASE SETUP
 // =============================================================================
-var Iconv = require('iconv').Iconv;
+
 // call the packages we need
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var request = require('request');
-var api= require('./api')
+var iconv = require('iconv-lite');
+var api= require('./api');
+var utf8 = require('utf8');
 var insertLeadEndpoint = "https://gcdc2013-iogrow.appspot.com/_ah/api/crmengine/v1/leads/insertv2?alt=json"
 // var insertLeadEndpoint = "http://localhost:8090/_ah/api/crmengine/v1/leads/insertv2?alt=json"
 
@@ -63,12 +65,15 @@ router.post('/import_leads', function(req, res) {
     var fullFilePath = jdata['file_path'];
     var splitter = fullFilePath.split('/gcdc2013-iogrow.appspot.com/');
     var filePath = splitter[1];
-
     api.Import({},filePath,{0:"fr"},
         function(resultRow,rawRow,rowIndex) {
             var params = {'access':'public'};
             for(var key in matchedColumns){
                 if (rawRow[key]){
+                    if (matchedColumns[key]==='fullname'){
+                        params.firstname = rawRow[key].split(' ').slice(0, -1).join(' ') || " ";
+                        params.lastname = rawRow[key].split(' ').slice(-1).join(' ') || " ";
+                    }
                     if (params.hasOwnProperty(matchedColumns[key])){
                         if (typeof(params[matchedColumns[key]])=='object'){
                             params[matchedColumns[key]].push(rawRow[key]);
@@ -111,7 +116,6 @@ router.post('/import_leads', function(req, res) {
             delete params.emails;
             delete params.phones;
             delete params.addresses;
-            console.log(params);
              request.post({url:insertLeadEndpoint, json:params}, function (error, response, body) {
              }).auth(null, null, true, jdata['token']);
         },
@@ -121,6 +125,7 @@ router.post('/import_leads', function(req, res) {
             });
             res.json({ message: 'imort api' });
         });
+        console.log('import res');
         res.json({ message: 'imort api' });
 });
 router.post('/export', function(req, res) {
@@ -128,10 +133,15 @@ router.post('/export', function(req, res) {
 });
 
 router.get('/json', function(req, res) {
-    var filePath = 'google (7).csv - google (7).csv.csv';
+    var filePath = 'tedj@reseller.success2i.com_1442929168.87.csv';
     api.Import({},filePath,{0:"fr"},
         function(resultRow,rawRow,rowIndex) {
+            console.log('in json api clbck console');
+            var r = JSON.stringify(rawRow);
+            var buf = utf8.encode(r);
+
             console.log(rawRow);
+            console.log('end json api clbck console');
         },
         function(){
             console.log('completed');
