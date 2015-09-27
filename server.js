@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var iconv = require('iconv-lite');
 var api= require('./api');
+var ExportApi=require('./exportApi');
 var utf8 = require('utf8');
 var insertLeadEndpoint = "https://gcdc2013-iogrow.appspot.com/_ah/api/crmengine/v1/leads/insertv2?alt=json"
 var insertContactEndpoint = "https://gcdc2013-iogrow.appspot.com/_ah/api/crmengine/v1/contacts/insertv2?alt=json"
@@ -122,6 +123,22 @@ router.get('/json', function(req, res) {
             console.log('completed');
         });
     res.json({ message: 'export api' });
+});
+router.post('/export_contact', function (req, res) {
+    var params = req.body;
+    ExportApi.exportAllContact(params, function (fileUrl) {
+          res.json({message: 'export complited ' , downloadUrl:fileUrl});
+    }, function () {
+          res.json({message: 'error'});
+    });
+});
+router.post('/export_contact_by_key', function (req, res) {
+    var params = req.body;
+    ExportApi.exportContactByKeys(params, function (fileUrl) {
+          res.json({message: 'export completed ' , downloadUrl:fileUrl});
+    }, function (error) {
+          res.json({message: "error"});
+    });
 });
 
 // more routes for our API will happen here
