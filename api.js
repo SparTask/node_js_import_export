@@ -140,7 +140,7 @@ exports.getInfoNodes = function(params){
 		}
 	}
 	return infoNodes;
-}
+git }
 exports.prepareParams = function(rawRow,matchedColumns,customFields){
 	var params = {'access':'public'};
             for(var key in matchedColumns){

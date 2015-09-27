@@ -126,9 +126,7 @@ router.post('/import_leads', function(req, res) {
         });
         res.json({ message: 'imort api' });
 });
-router.post('/export', function(req, res) {
-    res.json({ message: 'export api' });
-});
+
 
 router.get('/json', function(req, res) {
     var filePath = 'google (7).csv - google (7).csv.csv';
