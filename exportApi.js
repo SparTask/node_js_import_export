@@ -167,6 +167,28 @@ exports.exportAllContact = function (params, CallBack, error) {
                                             }
                                         }
                                     }
+                                    var customfields = getInfonodes(resp.infonodes, 'customfields');
+                                    console.log("********************");
+                                    console.log(customfields)
+                                    for (var k = 0; k < customfields.length; k++) {
+                                        var o=customfields[k]
+                                        //console.log(outlookhead.indexOf("E-mail " + k + " Address")) Custom Field 1 - Value
+                                        if (outlookhead.indexOf("Custom Field " + (k + 1) + " - Value") > 0) {
+                                            row[outlookhead.indexOf("Custom Field " + (k + 1) + " - Value")] = o[Object.keys(o)[0]];
+                                            row[outlookhead.indexOf("Custom Field " + (k + 1) + " - Type")] = Object.keys(o)[0];
+                                        } else {
+                                            var index =outlookhead.push("Custom Field " + (k+1) + " - Value");
+                                            row.splice(index-1, 0, o[Object.keys(o)[0]])
+                                            console.log("Custom Field " + (k+1) + " - Value", o[Object.keys(o)[0]] , index)
+                                            //refrech_tab(out, index -1)
+                                            index =outlookhead.push("Custom Field " + (k+1) + " - Type");
+                                            row.splice(index-1, 0, Object.keys(o)[0]);
+                                            //refrech_tab(out, index -1)
+
+                                        }
+                                    }
+
+
                                     if (resp.addresses) {
                                         var addresses = resp.addresses.items;
 
@@ -303,7 +325,7 @@ exports.exportContactByKeys = function (params, CallBack, error) {
     var opts = {metadata: {cacheControl: "public, max-age=300"}}
     var remoteWriteStream = file.createWriteStream(opts);
     var i = 0
-    var ids= eval(params.IDs)
+    var ids = eval(params.IDs)
     async.whilst(
         function () {
             return i < ids.length;
