@@ -139,22 +139,6 @@ router.get('/json', function(req, res) {
         });
     res.json({ message: 'export api' });
 });
-router.post('/export_contact', function (req, res) {
-    var params = req.body;
-    ExportApi.exportAllContact(params, function (fileUrl) {
-          res.json({message: 'export complited ' , downloadUrl:fileUrl});
-    }, function () {
-          res.json({message: 'error'});
-    });
-});
-router.post('/export_contact_by_key', function (req, res) {
-    var params = req.body;
-    ExportApi.exportContactByKeys(params, function (fileUrl) {
-          res.json({message: 'export completed ' , downloadUrl:fileUrl});
-    }, function (error) {
-          res.json({message: "error"});
-    });
-});
 
 router.post('/export_contact', function (req, res) {
     var params = req.body

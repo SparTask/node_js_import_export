@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../iogrow/.idea/iogrow.iml" filepath="$PROJECT_DIR$/../iogrow/.idea/iogrow.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/node_js_import_export.iml" filepath="$PROJECT_DIR$/.idea/node_js_import_export.iml" />
     </modules>
   </component>
