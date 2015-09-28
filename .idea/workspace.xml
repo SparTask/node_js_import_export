@@ -5,7 +5,6 @@
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../iogrow/gcdc2013-iogrow/favicon.ico" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../iogrow/# Creates a new ssh key, using the provided email as a label.pub" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../iogrow/# Creates a new ssh key, using the provided email as a label" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Google_App_Engine_SDK.xml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../iogrow/gcdc2013-iogrow/app.yaml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../iogrow/gcdc2013-iogrow/index.yaml" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../iogrow/iogrow.sublime-project" />
@@ -3790,6 +3789,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/static/plugins/flot/examples/axes-time-zones/tz/antarctica" afterPath="$PROJECT_DIR$/../iogrow/static/plugins/flot/examples/axes-time-zones/tz/antarctica" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/static/bootstrap3/plugins/ckeditor/samples/api.html" afterPath="$PROJECT_DIR$/../iogrow/static/bootstrap3/plugins/ckeditor/samples/api.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/static/plugins/ckeditor/samples/api.html" afterPath="$PROJECT_DIR$/../iogrow/static/plugins/ckeditor/samples/api.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api.js" afterPath="$PROJECT_DIR$/api.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/detectlanguage/api.py" afterPath="$PROJECT_DIR$/../iogrow/detectlanguage/api.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/requests/api.py" afterPath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/requests/api.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/gdata/tlslite/api.py" afterPath="$PROJECT_DIR$/../iogrow/gdata/tlslite/api.py" />
@@ -5081,7 +5081,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/requests/exceptions.py" afterPath="$PROJECT_DIR$/../iogrow/requests/exceptions.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/requests/packages/urllib3/exceptions.py" afterPath="$PROJECT_DIR$/../iogrow/requests/packages/urllib3/exceptions.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/googlecloudsdk/core/util/execution_utils.py" afterPath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/googlecloudsdk/core/util/execution_utils.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exportApi.js" afterPath="$PROJECT_DIR$/exportApi.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/jinja2/ext.py" afterPath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/jinja2/ext.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/static/bootstrap3/plugins/fullcalendar/demos/external-dragging.html" afterPath="$PROJECT_DIR$/../iogrow/static/bootstrap3/plugins/fullcalendar/demos/external-dragging.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/static/plugins/fullcalendar/demos/external-dragging.html" afterPath="$PROJECT_DIR$/../iogrow/static/plugins/fullcalendar/demos/external-dragging.html" />
@@ -6669,7 +6668,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/static/plugins/glyphicons/scripts/modernizr_license.txt" afterPath="$PROJECT_DIR$/../iogrow/static/plugins/glyphicons/scripts/modernizr_license.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/static/plugins/glyphicons_halflings/scripts/modernizr_license.txt" afterPath="$PROJECT_DIR$/../iogrow/static/plugins/glyphicons_halflings/scripts/modernizr_license.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/module1.yaml" afterPath="$PROJECT_DIR$/../iogrow/module1.yaml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/babel/messages/mofile.py" afterPath="$PROJECT_DIR$/../iogrow/babel/messages/mofile.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/babel/messages/tests/mofile.py" afterPath="$PROJECT_DIR$/../iogrow/babel/messages/tests/mofile.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/static/bootstrap3/plugins/bootstrap-daterangepicker/moment.js" afterPath="$PROJECT_DIR$/../iogrow/static/bootstrap3/plugins/bootstrap-daterangepicker/moment.js" />
@@ -6761,7 +6759,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/static/bootstrap3/plugins/bootstrap-datepicker/tests/suites/noconflict.js" afterPath="$PROJECT_DIR$/../iogrow/static/bootstrap3/plugins/bootstrap-datepicker/tests/suites/noconflict.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/static/app/scripts/vendor/socket.io/node_modules/engine.io-client/node_modules/debug/node.js" afterPath="$PROJECT_DIR$/../iogrow/static/app/scripts/vendor/socket.io/node_modules/engine.io-client/node_modules/debug/node.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/dns/node.py" afterPath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/dns/node.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/node_js_import_export.iml" afterPath="$PROJECT_DIR$/.idea/node_js_import_export.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/jinja2/nodes.py" afterPath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/jinja2/nodes.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/yaml/nodes.py" afterPath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/yaml/nodes.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/static/bootstrap3/plugins/jcrop/demos/non-image.html" afterPath="$PROJECT_DIR$/../iogrow/static/bootstrap3/plugins/jcrop/demos/non-image.html" />
@@ -8066,7 +8063,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/static/frontend/plugins/font-awesome/less/variables.less" afterPath="$PROJECT_DIR$/../iogrow/static/frontend/plugins/font-awesome/less/variables.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/static/plugins/bootstrap-switch/static/less/deps/variables.less" afterPath="$PROJECT_DIR$/../iogrow/static/plugins/bootstrap-switch/static/less/deps/variables.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/static/plugins/font-awesome/less/variables.less" afterPath="$PROJECT_DIR$/../iogrow/static/plugins/font-awesome/less/variables.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/dns/version.py" afterPath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/dns/version.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/docker/docker/version.py" afterPath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/docker/docker/version.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/googlecloudsdk/core/util/version.py" afterPath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/googlecloudsdk/core/util/version.py" />
@@ -8086,7 +8082,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/templates/live/welcome.html" afterPath="$PROJECT_DIR$/../iogrow/templates/live/welcome.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/gdata/tlslite/utils/win32prng.c" afterPath="$PROJECT_DIR$/../iogrow/gdata/tlslite/utils/win32prng.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/static/plugins/Wookmark-jQuery-master/wookmark.jquery.json" afterPath="$PROJECT_DIR$/../iogrow/static/plugins/Wookmark-jQuery-master/wookmark.jquery.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/googlecloudsdk/core/workspaces.py" afterPath="$PROJECT_DIR$/../iogrow/gcloud/google-cloud-sdk/lib/googlecloudsdk/core/workspaces.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/static/bootstrap3/plugins/jqvmap/samples/world.html" afterPath="$PROJECT_DIR$/../iogrow/static/bootstrap3/plugins/jqvmap/samples/world.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../iogrow/static/plugins/jqvmap/samples/world.html" afterPath="$PROJECT_DIR$/../iogrow/static/plugins/jqvmap/samples/world.html" />
@@ -8185,10 +8180,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ioendpoints.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ioendpoints.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../iogrow/ioendpoints.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5826772">
+            <state vertical-scroll-proportion="70.3">
               <caret line="1627" column="76" selection-start-line="1627" selection-start-column="76" selection-end-line="1627" selection-end-column="76" />
               <folding />
             </state>
@@ -8229,17 +8224,19 @@
         <entry file="file://$PROJECT_DIR$/api.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="142" column="4" selection-start-line="142" selection-start-column="4" selection-end-line="142" selection-end-column="4" />
-              <folding />
+              <caret line="141" column="4" selection-start-line="141" selection-start-column="4" selection-end-line="141" selection-end-column="4" />
+              <folding>
+                <marker date="1443430271624" expanded="true" signature="4243:7092" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.2">
-              <caret line="144" column="30" selection-start-line="144" selection-start-column="24" selection-end-line="144" selection-end-column="30" />
+            <state vertical-scroll-proportion="1.75">
+              <caret line="175" column="0" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -8265,7 +8262,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../iogrow" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -8286,8 +8283,8 @@
         <option value="$PROJECT_DIR$/exportApi.js" />
         <option value="$PROJECT_DIR$/../iogrow/templates/base.html" />
         <option value="$PROJECT_DIR$/../iogrow/iomodels/crmengine/contacts.py" />
-        <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/../iogrow/ioendpoints.py" />
+        <option value="$PROJECT_DIR$/server.js" />
       </list>
     </option>
   </component>
@@ -8639,9 +8636,9 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29032257" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29032257" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30483872" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30483872" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -9007,8 +9004,10 @@
     <entry file="file://$PROJECT_DIR$/api.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="142" column="4" selection-start-line="142" selection-start-column="4" selection-end-line="142" selection-end-column="4" />
-          <folding />
+          <caret line="141" column="4" selection-start-line="141" selection-start-column="4" selection-end-line="141" selection-end-column="4" />
+          <folding>
+            <marker date="1443430271624" expanded="true" signature="4243:7092" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -9043,14 +9042,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.2">
-          <caret line="144" column="30" selection-start-line="144" selection-start-column="24" selection-end-line="144" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/exportApi.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -9061,8 +9052,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../iogrow/ioendpoints.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5826772">
+        <state vertical-scroll-proportion="70.3">
           <caret line="1627" column="76" selection-start-line="1627" selection-start-column="76" selection-end-line="1627" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.75">
+          <caret line="175" column="0" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
           <folding />
         </state>
       </provider>

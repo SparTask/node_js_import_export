@@ -13,6 +13,8 @@ var api= require('./api');
 var ExportApi=require('./exportApi');
 var utf8 = require('utf8');
 var insertLeadEndpoint = "https://gcdc2013-iogrow.appspot.com/_ah/api/crmengine/v1/leads/insertv2?alt=json"
+var insertContactEndpoint = "https://gcdc2013-iogrow.appspot.com/_ah/api/crmengine/v1/contacts/insertv2?alt=json"
+var insertAccountEndpoint = "https://gcdc2013-iogrow.appspot.com/_ah/api/crmengine/v1/accounts/insert?alt=json"
 // var insertLeadEndpoint = "http://localhost:8090/_ah/api/crmengine/v1/leads/insertv2?alt=json"
 
 
@@ -127,6 +129,50 @@ router.post('/import_leads', function(req, res) {
         res.json({ message: 'imort api' });
 });
 
+router.post('/import_contacts', function(req, res) {
+    var jdata = JSON.parse(Object.keys(req.body)[0]);
+    var customFields = jdata['customfields_columns'];
+    var matchedColumns = jdata['matched_columns'];
+    var fullFilePath = jdata['file_path'];
+    var splitter = fullFilePath.split('/gcdc2013-iogrow.appspot.com/');
+    var filePath = splitter[1];
+    api.Import({},filePath,{0:"fr"},
+        function(resultRow,rawRow,rowIndex) {
+            var params = api.prepareParams(rawRow,matchedColumns,customFields);
+             request.post({url:insertContactEndpoint, json:params}, function (error, response, body) {
+             }).auth(null, null, true, jdata['token']);
+        },
+        function(){
+            var params = {'job_id':jdata['job_id']};
+            request.post({url:importCompletedEndpoint, json:params}, function (error, response, body) {
+            });
+            res.json({ message: 'imort api' });
+        });
+        console.log('import res');
+        res.json({ message: 'imort api' });
+});
+router.post('/import_accounts', function(req, res) {
+    var jdata = JSON.parse(Object.keys(req.body)[0]);
+    var customFields = jdata['customfields_columns'];
+    var matchedColumns = jdata['matched_columns'];
+    var fullFilePath = jdata['file_path'];
+    var splitter = fullFilePath.split('/gcdc2013-iogrow.appspot.com/');
+    var filePath = splitter[1];
+    api.Import({},filePath,{0:"fr"},
+        function(resultRow,rawRow,rowIndex) {
+            var params = api.prepareParams(rawRow,matchedColumns,customFields);
+             request.post({url:insertAccountEndpoint, json:params}, function (error, response, body) {
+             }).auth(null, null, true, jdata['token']);
+        },
+        function(){
+            var params = {'job_id':jdata['job_id']};
+            request.post({url:importCompletedEndpoint, json:params}, function (error, response, body) {
+            });
+            res.json({ message: 'imort api' });
+        });
+        console.log('import res');
+        res.json({ message: 'imort api' });
+});
 
 router.get('/json', function(req, res) {
     var filePath = 'google (7).csv - google (7).csv.csv';

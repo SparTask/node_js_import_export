@@ -189,7 +189,7 @@ exports.prepareParams = function(rawRow,matchedColumns,customFields){
                 }     
             }
             console.log('---------------PARAMS BEFORE TRANSOFRMATION----------');
-            console.log(params.customFields);
+            console.log(params);
             params.infonodes = _this.getInfoNodes(params);
             delete params.emails;
             delete params.phones;
