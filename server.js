@@ -2,7 +2,7 @@
 
 // BASE SETUP
 // =============================================================================
-
+var Iconv = require('iconv').Iconv;
 // call the packages we need
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
@@ -68,9 +68,55 @@ router.post('/import_leads', function(req, res) {
     var fullFilePath = jdata['file_path'];
     var splitter = fullFilePath.split('/gcdc2013-iogrow.appspot.com/');
     var filePath = splitter[1];
+
     api.Import({},filePath,{0:"fr"},
         function(resultRow,rawRow,rowIndex) {
-            var params = api.prepareParams(rawRow,matchedColumns,customFields);
+            var params = {'access':'public'};
+            for(var key in matchedColumns){
+                if (rawRow[key]){
+                    if (params.hasOwnProperty(matchedColumns[key])){
+                        if (typeof(params[matchedColumns[key]])=='object'){
+                            params[matchedColumns[key]].push(rawRow[key]);
+                        }else{
+                            var newList = [];
+                            newList.push(params[matchedColumns[key]]);
+                            newList.push(rawRow[key]);
+                            params[matchedColumns[key]]=newList;
+                        }
+                    }
+                    else{
+                        params[matchedColumns[key]]=rawRow[key];
+                    }
+                }
+            }
+            for(var key in customFields){
+                if (rawRow[key]){
+                    var customObj = {};
+                    if (params.hasOwnProperty(customFields[key])){
+                        if (typeof(params[customFields[key]])=='object'){
+                            customObj['default_field']=customFields[key]
+                            customObj['value']=rawRow[key]
+                            params['customFields'].push(customObj);
+                        }else{
+                            var newList = [];
+                            customObj['default_field']=customFields[key]
+                            customObj['value']=rawRow[key]
+                            newList['customFields'].push(customObj);
+                            params['customFields']=newList;
+                        }
+                    }
+                    else{
+                        customObj['default_field']=customFields[key]
+                        customObj['value']=rawRow[key]
+                        params['customFields']=customObj;
+                    }
+                }
+            }
+            params.infonodes = api.getInfoNodes(params);
+            delete params.emails;
+            delete params.phones;
+            delete params.addresses;
+            console.log(params);
              request.post({url:insertLeadEndpoint, json:params}, function (error, response, body) {
              }).auth(null, null, true, jdata['token']);
         },
@@ -80,9 +126,9 @@ router.post('/import_leads', function(req, res) {
             });
             res.json({ message: 'imort api' });
         });
-        console.log('import res');
         res.json({ message: 'imort api' });
 });
+
 router.post('/import_contacts', function(req, res) {
     var jdata = JSON.parse(Object.keys(req.body)[0]);
     var customFields = jdata['customfields_columns'];
@@ -127,28 +173,22 @@ router.post('/import_accounts', function(req, res) {
         console.log('import res');
         res.json({ message: 'imort api' });
 });
-router.post('/export', function(req, res) {
-    res.json({ message: 'export api' });
-});
 
 router.get('/json', function(req, res) {
-    var filePath = 'tedj@reseller.success2i.com_1442929168.87.csv';
+    var filePath = 'google (7).csv - google (7).csv.csv';
     api.Import({},filePath,{0:"fr"},
         function(resultRow,rawRow,rowIndex) {
-            console.log('in json api clbck console');
-            var r = JSON.stringify(rawRow);
-            var buf = utf8.encode(r);
-
             console.log(rawRow);
-            console.log('end json api clbck console');
         },
         function(){
             console.log('completed');
         });
     res.json({ message: 'export api' });
 });
+
 router.post('/export_contact', function (req, res) {
-    var params = req.body;
+    var params = req.body
+    console.log(typeof  params);
     ExportApi.exportAllContact(params, function (fileUrl) {
           res.json({message: 'export complited ' , downloadUrl:fileUrl});
     }, function () {
@@ -156,7 +196,8 @@ router.post('/export_contact', function (req, res) {
     });
 });
 router.post('/export_contact_by_key', function (req, res) {
-    var params = req.body;
+    var params = req.body
+    console.log(typeof  params);
     ExportApi.exportContactByKeys(params, function (fileUrl) {
           res.json({message: 'export completed ' , downloadUrl:fileUrl});
     }, function (error) {

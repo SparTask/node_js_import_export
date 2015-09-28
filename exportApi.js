@@ -55,7 +55,7 @@ function getItem(params, url, access_token, callback) {
 // ************************************ APIs core******************
 exports.exportAllContact = function (params, CallBack, error) {
     var out = [outlookhead];
-    var p = {order: "-updated_at", limit: 20}
+    var p = {order: "-updated_at", limit: 20 , tags:params.tags}
     var nextPageToken = "az";
     var file = bucket.file(params.fileName + ".csv");
     file.acl.add({

@@ -47,6 +47,10 @@ var ioEncoding = function(){
 exports.Import = function (params, file, map, callback , end ) {
     var fileStream = backups.file(file).createReadStream();
     var converter = new Converter({constructResult: false});
+    var csvConv = new Iconv('cp1252', 'utf-8');
+    var asciConv = new Iconv('ISO-8859-1', 'utf-8');
+    // var csvConv = new Iconv('cp1252', 'utf-8');
+//end_parsed will be emitted once parsing finished
     converter.on("end_parsed", end);
     converter.on("record_parsed", callback);
     fileStream.pipe(ioEncoding()).pipe(converter);
@@ -136,7 +140,7 @@ exports.getInfoNodes = function(params){
 		}
 	}
 	return infoNodes;
-}
+git }
 exports.prepareParams = function(rawRow,matchedColumns,customFields){
 	var params = {'access':'public'};
             for(var key in matchedColumns){
